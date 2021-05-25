@@ -28,7 +28,6 @@ void Graph::addEdge(int start, int end, int value){
     Edge * newEdge = new Edge(nodes->getNode(start), nodes->getNode(end), value, edgesCounter);
     edgesCounter++;
     if(edges) edges->addElement(newEdge);
-
 }
 
 void Graph::addNode(int index){
@@ -37,16 +36,32 @@ void Graph::addNode(int index){
 
 Graph::Node * Graph::NodesList::getNode(int index){}
 
+
+
+
+void Graph::addNode(int index){
+    if(!nodes->getNode(index)){
+        Node * newNode = new Node(index);
+        nodes->addElement(newNode);
+        nodesCounter++;
+    }
+}
+
+//----------------Graph::Node----------------//
+Graph::Node::Node(int i){
+    index = i;
+    adjacentNodes = nullptr;
+}
+
+Graph::Node::~Node(){
+    adjacentNodes->deleteIndexesList();
+}
+
+//----------------Graph::Edge----------------//
 Graph::Edge::Edge(Node * s, Node * e, double v, int i){
     start = s;
     end = e;
     value = v;
     index = i;
 }
-
-
-void Graph::addNode(int index){
-    Node * newNode = new Node(index, nullptr);
-
-
-}
+Graph::Edge::~Edge(){}

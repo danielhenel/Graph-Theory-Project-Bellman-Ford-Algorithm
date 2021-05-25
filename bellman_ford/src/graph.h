@@ -8,15 +8,21 @@ class Graph{
     class Node;
     class EdgeList;
     class Edge;
+    class IndexesList;
 
     //a class to represent nodes in the graph
     class Node{
         private:
             int index; ///< node index
-            int * adjacentNodes; ///< a list containing adjacent nodes of this node
+            IndexesList * adjacentNodes; ///< a list containing indexes of adjacent nodes of this node
         public:
-           Node(int index, int * nodes);
-           // ~Node();
+            /** Node constructor
+            @param index ///< node index
+            */
+            Node(int index);
+            /** Node destructor
+            */
+            ~Node();
     };
     
     //a class to represent edges in the graph
@@ -27,8 +33,14 @@ class Graph{
             double value; ///< egde value
             int index; ///< egde index
         public:
-           Edge(Node * s, Node * e, double v, int i);
-           // ~Edge();
+            /** Edge constructor
+            @param start //< a pointer to start node of edge
+            @param end ///< a pointer to end node of edge
+            @param value ///< egde value
+            @param index ///< egde index
+            */
+            Edge(Node * start, Node * end, double value, int index);
+            ~Edge();
     };
 
     //a class to represent one element of list of edges
@@ -67,8 +79,8 @@ class Graph{
         public:
             NodesList();
             ~NodesList();
-            void addElement();
-            void deleteElement();
+            void addElement(Node * newNode);
+            void deleteElement(Node * deletedNode);
             Node * getNode(int index);
     };
 
@@ -77,8 +89,13 @@ class Graph{
         IndexesListElement * pNext;
     };
     class IndexesList{
-        IndexesListElement * firstElement;
-        IndexesListElement * lastElement;
+        private:
+            IndexesListElement * firstElement;
+            IndexesListElement * lastElement;
+        public:
+            void addElement(int value);
+            void deleteElement(int value);
+            void deleteIndexesList();
     };
     private:
         NodesList * nodes; ///< list of nodes in the graph
@@ -97,6 +114,10 @@ class Graph{
          @param index ///< new node index
         */
         void addNode(int index);
+        
+        void removeEgde();
+        void removeNode();
+        
 
     public:
     /** graph creator - random values
