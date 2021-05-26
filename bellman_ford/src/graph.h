@@ -4,9 +4,9 @@ using namespace std;
 //a class to represent the graph
 class Graph{
 
-    class NodeList;
+    class NodesList;
     class Node;
-    class EdgeList;
+    class EdgesList;
     class Edge;
     class IndexesList;
 
@@ -23,6 +23,7 @@ class Graph{
             /** Node destructor
             */
             ~Node();
+            bool operator==(Node x);
     };
     
     //a class to represent edges in the graph
@@ -41,22 +42,21 @@ class Graph{
             */
             Edge(Node * start, Node * end, double value, int index);
             ~Edge();
+            bool operator==(Edge x);
     };
 
-    //a class to represent one element of list of edges
-    class EdgesListElement{
-        private:
-            Edge element; ///< edge
-            EdgesListElement * pNext; ///< a pointer to next element
-            EdgesListElement * pPrev; ///< a pointer to previous element
+    //a struct to represent one element of list of edges
+    struct EdgesListElement{
+        Edge element; ///< edge
+        EdgesListElement * pNext; ///< a pointer to next element
+        EdgesListElement * pPrev; ///< a pointer to previous element
     };
 
-    //a class to represent one element of list of nodes
-    class NodesListElement{
-        private:
-            Node element; ///< node
-            NodesListElement * pNext; ///< a pointer to next element
-            NodesListElement * pPrev; ///< a pointer to previous element
+    //a struct to represent one element of list of nodes
+    struct NodesListElement{
+        Node element; ///< node
+        NodesListElement * pNext; ///< a pointer to next element
+        NodesListElement * pPrev; ///< a pointer to previous element
     };
 
     //a class to represent list of edges
@@ -64,11 +64,26 @@ class Graph{
         private:
             EdgesListElement * firstElement; ///< a pointer to first element
             EdgesListElement * lastElement; ///< a pointer to last element
+            /** use this function to delete all edges
+            */
+            void deleteEdgesList();
         public:
+            /** edge list constructor: default pointer to first and last element is nullptr
+            */
             EdgesList();
+            /** egde list destructor: all edges will be deleted
+            */
             ~EdgesList();
-            void addElement(Edge * newElement);
-            void deleteElement(Edge * deletedElement);
+            /** use this function to add new element
+            @param newElement ///< new edge
+             */
+            void addElement(Edge newEdge);
+            /** use this function to delete a element
+            @param deletedElement ///< deleted edge
+             */
+            void deleteElement(Edge deletedEdge);
+
+            
     };
 
     //a class to represent list of nodes
@@ -76,30 +91,59 @@ class Graph{
         private:
             NodesListElement * firstElement; ///< a pointer to first element
             NodesListElement * lastElement; ///< a pointer to last element
+            /** use this function to delete all nodes
+            */
+            void deleteNodesList();
         public:
+            /** node list constructor: default pointer to first and last element is nullptr
+            */
             NodesList();
+            /** node list destructor: all nodes will be deleted
+            */
             ~NodesList();
-            void addElement(Node * newNode);
-            void deleteElement(Node * deletedNode);
-            Node * getNode(int index);
+            /** use this function to add new element
+            @param newElement ///< new node
+             */
+            void addElement(Node newNode);
+            /** use this function to delete a element
+            @param deletedNode ///< deleted node
+             */
+            void deleteElement(Node deletedNode);
+
+            //Node * getNode(int index);
     };
 
-    class IndexesListElement{
+    struct IndexesListElement{
         int value;
         IndexesListElement * pNext;
+        IndexesListElement * pPrev;
     };
     class IndexesList{
         private:
             IndexesListElement * firstElement;
             IndexesListElement * lastElement;
-        public:
-            void addElement(int value);
-            void deleteElement(int value);
+            /** use this function to delete indexes list
+            */
             void deleteIndexesList();
+        public:
+            /** indexes list constructor: default pointer to first and last element is nullptr
+            */
+            IndexesList();
+            /** indexes list destructor: all indexes list elements will be deleted
+            */
+            ~IndexesList();
+            /** use this function to add a element
+            @param deletedNode ///< new value
+             */
+            void addElement(int value);
+            /** use this function to delete a element
+            @param value ///< deleted value
+             */
+            void deleteElement(int value);
     };
     private:
-        NodesList * nodes; ///< list of nodes in the graph
-        EdgesList * edges; ///< list of edges in the graph
+        NodesList nodes; ///< list of nodes in the graph
+        EdgesList edges; ///< list of edges in the graph
         int nodesCounter = 0; ///< number of nodes in the graph
         int edgesCounter = 0; ///< number of edges in the graph
 
