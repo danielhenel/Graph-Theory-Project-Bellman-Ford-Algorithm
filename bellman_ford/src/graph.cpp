@@ -1,16 +1,56 @@
 #include <iostream>
 #include <fstream>
+#include <sstream>
+#include <vector>
+#include <ctime>
 #include "graph.h"
 using namespace std;
 
 //----------------Graph----------------//
 Graph::Graph(const char * fileName, bool v) {
-ifstream file(fileName);
+vector<vector<int>> tab = readFile(fileName);
+    if(v){ //incident matrix
+        for(int j = 0; j < tab[0].size(); j++){
+            int start = -1;
+            int end = -1;
+            for(int i = 0; i < tab.size(); i++){
+                if(tab[i][j] == 1) start = i;
+                if(tab[i][j] == -1) end = i;
+                if(start >= 0 && end >=0){
+                    addEdge(start, end, randomValue());
+                }
+            }
+        }
+    }
+    else{ //adjacency list
+        for(int i = 0; i < tab.size(); i++)
+            for(int j = 0; j < tab[i].size(); j++)
+                addEdge(i, tab[i][j], randomValue());
+    }
 }
 
+
 Graph::Graph(const char * fileName_1, const char * fileName_2, bool v){
-ifstream file_1(fileName_1);
-ifstream file_2(fileName_2);
+vector<vector<int>> tab = readFile(fileName_1);
+vector<vector<int>> values = readFile(fileName_2);
+    if(v){ //incident matrix
+        for(int j = 0; j < tab[0].size(); j++){
+            int start = -1;
+            int end = -1;
+            for(int i = 0; i < tab.size(); i++){
+                if(tab[i][j] == 1) start = i;
+                if(tab[i][j] == -1) end = i;
+                if(start >= 0 && end >=0){
+                    addEdge(start, end, values[start][end]);
+                }
+            }
+        }
+    }
+    else{ //adjacency list
+        for(int i = 0; i < tab.size(); i++)
+            for(int j = 0; j < tab[i].size(); j++)
+                addEdge(i, tab[i][j], values[i][tab[i][j]]);
+    }
 }
 
 
@@ -25,6 +65,7 @@ void Graph::addEdge(int start, int end, int value){
     }
     Edge newEdge(nodes.getNode(start), nodes.getNode(end), value, edgesCounter);
     edges.addElement(newEdge);
+    nodes.getNode(start)->addNewAdjacentNode(end);
     edgesCounter++;
 }
 
@@ -35,6 +76,30 @@ void Graph::addNode(int index){
         nodes.addElement(newNode);
         nodesCounter++;
     }
+}
+
+vector<vector<int>> Graph::readFile(string fileName){
+ifstream file(fileName);
+    vector<vector<int>> tab;
+    if(file){
+        string row;
+        while(getline(file, row)){
+            stringstream ss;
+            vector<int> numbers;
+            ss << row;
+            int number;
+            while(ss >> number){
+                numbers.push_back(number);
+            }
+            tab.push_back(numbers);
+        }
+    }
+    return tab;
+}
+
+int Graph::randomValue(){
+    srand((unsigned)time(0)); 
+    return (rand()%1000)+1; 
 }
 
 //----------------Graph::Node----------------//
@@ -55,6 +120,10 @@ bool Graph::Node::operator==(Node x){
 bool Graph::Node::operator==(int x){
     if(this->index == x) return true;
     else return false;
+}
+
+void Graph::Node::addNewAdjacentNode(int index){
+    adjacentNodes->addElement(index);
 }
 
 //----------------Graph::Edge----------------//

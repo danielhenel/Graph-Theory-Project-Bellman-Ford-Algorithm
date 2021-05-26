@@ -1,4 +1,6 @@
 #include <iostream>
+#include <vector>
+#include <string>
 using namespace std;
 
 //a class to represent the graph
@@ -28,6 +30,7 @@ class Graph{
             ~Node();
             bool operator==(Node x);
             bool operator==(int x);
+            void addNewAdjacentNode(int index);
     };
     
     //a class to represent edges in the graph
@@ -166,6 +169,8 @@ class Graph{
         
         void removeEgde();
         void removeNode();
+        vector<vector<int>> readFile(string fileName);
+        int randomValue();
         
 
     public:
