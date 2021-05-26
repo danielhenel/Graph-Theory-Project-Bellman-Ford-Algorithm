@@ -3,23 +3,20 @@
 #include "graph.h"
 using namespace std;
 
+//----------------Graph----------------//
 Graph::Graph(const char * fileName, bool v) {
 ifstream file(fileName);
-
-
-
-
 }
 
 Graph::Graph(const char * fileName_1, const char * fileName_2, bool v){
 ifstream file_1(fileName_1);
 ifstream file_2(fileName_2);
-
-
 }
 
-/*
+
 void Graph::addEdge(int start, int end, int value){
+
+    
     if(start > nodesCounter - 1 && start > 0){
         addNode(start);
     }
@@ -27,19 +24,19 @@ void Graph::addEdge(int start, int end, int value){
         addNode(end);
     }
     Edge newEdge(nodes.getNode(start), nodes.getNode(end), value, edgesCounter);
-    edgesCounter++;
     edges.addElement(newEdge);
-}*/
+    edgesCounter++;
+}
 
-/*
+
 void Graph::addNode(int index){
     if(!nodes.getNode(index)){
-        Node * newNode = new Node(index);
+        Node newNode(index);
         nodes.addElement(newNode);
         nodesCounter++;
     }
 }
-*/
+
 //----------------Graph::Node----------------//
 Graph::Node::Node(int i){
     index = i;
@@ -55,6 +52,11 @@ bool Graph::Node::operator==(Node x){
     else return false;
 }
 
+bool Graph::Node::operator==(int x){
+    if(this->index == x) return true;
+    else return false;
+}
+
 //----------------Graph::Edge----------------//
 Graph::Edge::Edge(Node * s, Node * e, double v, int i){
     start = s;
@@ -66,6 +68,11 @@ Graph::Edge::~Edge(){}
 
 bool Graph::Edge::operator==(Edge x){
     if(this->index == x.index) return true;
+    else return false;
+}
+
+bool Graph::Edge::operator==(int x){
+    if(this->index == x) return true;
     else return false;
 }
 
@@ -201,10 +208,17 @@ void Graph::NodesList::deleteNodesList(){
         this->deleteElement(firstElement->element);
     }
 }
-/*
-Graph::Node * Graph::NodesList::getNode(int index){
 
-}*/
+
+Graph::Node * Graph::NodesList::getNode(int index){
+    NodesListElement * temp = firstElement;
+    while(temp){
+        if(temp->element == index) return &(temp->element);
+        temp = temp->pNext;
+    }
+    return nullptr;
+}
+
 
 //----------------Graph::IndexesList----------------//
 Graph::IndexesList::IndexesList(){

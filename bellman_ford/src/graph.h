@@ -4,10 +4,13 @@ using namespace std;
 //a class to represent the graph
 class Graph{
 
-    class NodesList;
     class Node;
-    class EdgesList;
+    class NodeListElement;
+    class NodesList;
     class Edge;
+    class EdgesListElement;
+    class EdgesList;
+    class IndexesListElement;
     class IndexesList;
 
     //a class to represent nodes in the graph
@@ -24,6 +27,7 @@ class Graph{
             */
             ~Node();
             bool operator==(Node x);
+            bool operator==(int x);
     };
     
     //a class to represent edges in the graph
@@ -43,6 +47,7 @@ class Graph{
             Edge(Node * start, Node * end, double value, int index);
             ~Edge();
             bool operator==(Edge x);
+            bool operator==(int x);
     };
 
     //a struct to represent one element of list of edges
@@ -109,8 +114,7 @@ class Graph{
             @param deletedNode ///< deleted node
              */
             void deleteElement(Node deletedNode);
-
-            //Node * getNode(int index);
+            Node * getNode(int index);
     };
 
     struct IndexesListElement{
@@ -141,6 +145,7 @@ class Graph{
              */
             void deleteElement(int value);
     };
+
     private:
         NodesList nodes; ///< list of nodes in the graph
         EdgesList edges; ///< list of edges in the graph
