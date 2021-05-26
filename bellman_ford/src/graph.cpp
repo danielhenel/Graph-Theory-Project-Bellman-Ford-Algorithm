@@ -7,7 +7,7 @@
 using namespace std;
 
 //----------------Graph----------------//
-Graph::Graph(const char * fileName, bool v) {
+Graph::Graph(string fileName, bool v) {
 vector<vector<int>> tab = readFile(fileName);
     if(v){ //incident matrix
         for(int j = 0; j < tab[0].size(); j++){
@@ -30,7 +30,7 @@ vector<vector<int>> tab = readFile(fileName);
 }
 
 
-Graph::Graph(const char * fileName_1, const char * fileName_2, bool v){
+Graph::Graph(string fileName_1, string fileName_2, bool v){
 vector<vector<int>> tab = readFile(fileName_1);
 vector<vector<int>> values = readFile(fileName_2);
     if(v){ //incident matrix
@@ -102,6 +102,19 @@ int Graph::randomValue(){
     return (rand()%1000)+1; 
 }
 
+void Graph::operator=(Graph x){
+    this->nodes = x.nodes;
+    this->edges = x.edges;
+    this->nodesCounter = x.nodesCounter;
+    this->edgesCounter = x.edgesCounter;
+}
+
+Graph::~Graph(){}
+
+void Graph::printEdges(){
+    edges.printEdges();
+}
+
 //----------------Graph::Node----------------//
 Graph::Node::Node(int i){
     index = i;
@@ -126,6 +139,10 @@ void Graph::Node::addNewAdjacentNode(int index){
     adjacentNodes->addElement(index);
 }
 
+int Graph::Node::getIndex(){
+    return index;
+}
+
 //----------------Graph::Edge----------------//
 Graph::Edge::Edge(Node * s, Node * e, double v, int i){
     start = s;
@@ -143,6 +160,10 @@ bool Graph::Edge::operator==(Edge x){
 bool Graph::Edge::operator==(int x){
     if(this->index == x) return true;
     else return false;
+}
+
+void Graph::Edge::printEdge(){
+    cout<<index<<"::\t"<<start->getIndex()<<" ---> "<<end->getIndex()<<"\tvalue: "<<value<<endl;
 }
 
 //----------------Graph::EdgesList----------------//
@@ -211,7 +232,13 @@ void Graph::EdgesList::deleteEdgesList(){
     }
 }
 
-
+void::Graph::EdgesList::printEdges(){
+    EdgesListElement * temp = firstElement;
+    while(temp){
+        temp->element.printEdge();
+        temp = temp->pNext;
+    }
+}
 //----------------Graph::NodesList----------------//
 Graph::NodesList::NodesList(){
     firstElement = nullptr;
@@ -353,4 +380,71 @@ void Graph::IndexesList::deleteIndexesList(){
     while(firstElement){
         this->deleteElement(firstElement->value);
     }
+}
+
+//----------------Load Graph----------------//
+bool loadGraph(Graph & graph){
+    cout<<"Hello! Load your Graph!\n";
+    cout<<"Select A to load a graph from the adjacency list\n";
+    cout<<"Select I to load a graph from the incident list\n";
+    char s;
+    while(cin>>s && s!='I' && s!='A'){
+        cout<<"Select A to load a graph from the adjacency list\n";
+        cout<<"Select I to load a graph from the incident list\n";
+    }
+    if(s == 'I'){
+        cout<<"Select R to set random edges values\n";
+        cout<<"Select F to load edges values from the file\n";
+        while(cin>>s && s!='R' && s!='F'){
+            cout<<"Select R to set random edges values\n";
+            cout<<"Select F to load edges values from the file\n";
+        }
+        if(s == 'F'){
+            string fileName_1;
+            string fileName_2;
+            cout<<"Enter name of the file with an incident matrix\n";
+            cin >> fileName_1;
+            cout<<"Enter name of the file with a value matrix\n";
+            cin >> fileName_2;
+            cout<<"GRAPH LOADING\n";
+            graph = Graph(fileName_1, fileName_2, true); //
+            return 1;
+        }
+        if(s == 'R'){
+            string fileName;
+            cout<<"Enter name of the file with an incident matrix\n";
+            cin >> fileName;
+            cout<<"GRAPH LOADING\n";
+            graph = Graph(fileName, true); //
+            return 1;
+        }
+    }
+    if(s == 'A'){
+        cout<<"Select R to set random edges values\n";
+        cout<<"Select F to load edges values from the file\n";
+        while(cin>>s && s!='R' && s!='F'){
+            cout<<"Select R to set random edges values\n";
+            cout<<"Select F to load edges values from the file\n";
+        }
+        if(s == 'F'){
+            string fileName_1;
+            string fileName_2;
+            cout<<"Enter name of the file with an adjacency list\n";
+            cin >> fileName_1;
+            cout<<"Enter name of the file with a value matrix\n";
+            cin >> fileName_2;
+            cout<<"GRAPH LOADING\n";
+            graph = Graph(fileName_1, fileName_2, false); //
+            return 1;
+        }
+        if(s == 'R'){
+            string fileName;
+            cout<<"Enter name of the file with an adjacency list\n";
+            cin >> fileName;
+            cout<<"GRAPH LOADING\n";
+            graph = Graph(fileName, false); //
+            return 1;
+        }
+    }
+    return 0;
 }

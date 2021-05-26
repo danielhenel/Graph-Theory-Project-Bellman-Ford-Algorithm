@@ -31,6 +31,7 @@ class Graph{
             bool operator==(Node x);
             bool operator==(int x);
             void addNewAdjacentNode(int index);
+            int getIndex();
     };
     
     //a class to represent edges in the graph
@@ -51,6 +52,7 @@ class Graph{
             ~Edge();
             bool operator==(Edge x);
             bool operator==(int x);
+            void printEdge();
     };
 
     //a struct to represent one element of list of edges
@@ -90,7 +92,7 @@ class Graph{
             @param deletedElement ///< deleted edge
              */
             void deleteElement(Edge deletedEdge);
-
+            void printEdges();
             
     };
 
@@ -118,6 +120,7 @@ class Graph{
              */
             void deleteElement(Node deletedNode);
             Node * getNode(int index);
+            //void printNodes();
     };
 
     struct IndexesListElement{
@@ -178,19 +181,25 @@ class Graph{
         @param fileName ///< a file with incident matrix or adjacency list
         @param v ///< if true fileName_1 is incident matrix else fileName_2 is adjacency list
     */
-        Graph(const char * fileName, bool v); ///< graph creator - random values
+        Graph(string fileName, bool v); ///< graph creator - random values
 
     /** graph creator - values from file
         @param fileName_1 ///< a file with incident matrix or adjacency list
         @param filneName_2 ///< a file with edges values
         @param v ///< if true fileName_1 contains incident matrix else fileName_1 constains adjacency list
     */
-        Graph(const char * fileName_1, const char * fileName_2, bool v);
+        Graph(string fileName_1, string fileName_2, bool v);
     
     /** graph destructor
     */
         ~Graph();
+        Graph(){}
+        void operator=(Graph x);
+        void printEdges();
+        
 
 
 
 };
+
+bool loadGraph(Graph & graph);
