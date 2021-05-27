@@ -56,11 +56,11 @@ vector<vector<int>> values = readFile(fileName_2);
 
 void Graph::addEdge(int start, int end, int value){
 
-    
-    if(start > nodesCounter - 1 && start > 0){
+
+    if(!nodes.getNode(start)){
         addNode(start);
     }
-    if(end > nodesCounter - 1 && end > 0){
+    if(!nodes.getNode(end)){
         addNode(end);
     }
     Edge newEdge(nodes.getNode(start), nodes.getNode(end), value, edgesCounter);
@@ -118,11 +118,12 @@ void Graph::printEdges(){
 //----------------Graph::Node----------------//
 Graph::Node::Node(int i){
     index = i;
-    adjacentNodes = nullptr;
+    adjacentNodes = new IndexesList();
 }
 
 Graph::Node::~Node(){
-    adjacentNodes->~IndexesList();
+   adjacentNodes->~IndexesList();
+   delete adjacentNodes;
 }
 
 bool Graph::Node::operator==(Node x){
@@ -178,7 +179,7 @@ void Graph::EdgesList::addElement(Edge newElement){
         firstElement = lastElement = new EdgesListElement{newElement, nullptr, nullptr};
     }
     else{
-        lastElement->pNext = new EdgesListElement{newElement, lastElement, nullptr};
+        lastElement->pNext = new EdgesListElement{newElement, nullptr, lastElement};
         lastElement = lastElement->pNext;
     }
 
@@ -251,7 +252,7 @@ void Graph::NodesList::addElement(Node newElement){
         firstElement = lastElement = new NodesListElement{newElement, nullptr, nullptr};
     }
     else{
-        lastElement->pNext = new NodesListElement{newElement, lastElement, nullptr};
+        lastElement->pNext = new NodesListElement{newElement, nullptr, lastElement};
         lastElement = lastElement->pNext;
     }
 
@@ -328,7 +329,7 @@ void Graph::IndexesList::addElement(int newElement){
         firstElement = lastElement = new IndexesListElement{newElement, nullptr, nullptr};
     }
     else{
-        lastElement->pNext = new IndexesListElement{newElement, lastElement, nullptr};
+        lastElement->pNext = new IndexesListElement{newElement, nullptr, lastElement};
         lastElement = lastElement->pNext;
     }
 
@@ -383,7 +384,7 @@ void Graph::IndexesList::deleteIndexesList(){
 }
 
 //----------------Load Graph----------------//
-bool loadGraph(Graph & graph){
+Graph * loadGraph(){
     cout<<"Hello! Load your Graph!\n";
     cout<<"Select A to load a graph from the adjacency list\n";
     cout<<"Select I to load a graph from the incident list\n";
@@ -407,16 +408,16 @@ bool loadGraph(Graph & graph){
             cout<<"Enter name of the file with a value matrix\n";
             cin >> fileName_2;
             cout<<"GRAPH LOADING\n";
-            graph = Graph(fileName_1, fileName_2, true); //
-            return 1;
+            Graph * graph = new Graph(fileName_1, fileName_2, true); //
+            return graph;
         }
         if(s == 'R'){
             string fileName;
             cout<<"Enter name of the file with an incident matrix\n";
             cin >> fileName;
             cout<<"GRAPH LOADING\n";
-            graph = Graph(fileName, true); //
-            return 1;
+            Graph * graph = new Graph(fileName, true); //
+            return graph;
         }
     }
     if(s == 'A'){
@@ -434,16 +435,16 @@ bool loadGraph(Graph & graph){
             cout<<"Enter name of the file with a value matrix\n";
             cin >> fileName_2;
             cout<<"GRAPH LOADING\n";
-            graph = Graph(fileName_1, fileName_2, false); //
-            return 1;
+            Graph * graph = new Graph(fileName_1, fileName_2, false); //
+            return graph;
         }
         if(s == 'R'){
             string fileName;
             cout<<"Enter name of the file with an adjacency list\n";
             cin >> fileName;
             cout<<"GRAPH LOADING\n";
-            graph = Graph(fileName, false); //
-            return 1;
+            Graph * graph = new Graph(fileName, false);
+            return graph;
         }
     }
     return 0;

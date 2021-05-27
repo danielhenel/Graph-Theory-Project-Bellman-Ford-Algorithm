@@ -196,10 +196,10 @@ class Graph{
         Graph(){}
         void operator=(Graph x);
         void printEdges();
-        
+
 
 
 
 };
 
-bool loadGraph(Graph & graph);
+Graph * loadGraph();
