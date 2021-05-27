@@ -18,6 +18,7 @@ vector<vector<int>> tab = readFile(fileName);
                 if(tab[i][j] == -1) end = i;
                 if(start >= 0 && end >=0){
                     addEdge(start, end, randomValue());
+                    break;
                 }
             }
         }
@@ -42,6 +43,7 @@ vector<vector<int>> values = readFile(fileName_2);
                 if(tab[i][j] == -1) end = i;
                 if(start >= 0 && end >=0){
                     addEdge(start, end, values[start][end]);
+                    break;
                 }
             }
         }
@@ -121,10 +123,7 @@ Graph::Node::Node(int i){
     adjacentNodes = new IndexesList();
 }
 
-Graph::Node::~Node(){
-   adjacentNodes->~IndexesList();
-   delete adjacentNodes;
-}
+Graph::Node::~Node(){}
 
 bool Graph::Node::operator==(Node x){
     if(this->index == x.index) return true;
@@ -339,6 +338,7 @@ void Graph::IndexesList::deleteElement(int deletedElement){
         if(firstElement != lastElement){ //more then one element in the list
             IndexesListElement * temp = firstElement;
             firstElement = firstElement->pNext;
+            firstElement->pPrev = nullptr;
             delete temp;
             return;
         }
