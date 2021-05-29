@@ -3,6 +3,7 @@
 #include <sstream>
 #include <vector>
 #include <ctime>
+#include <cstdlib>
 #include "graph.h"
 using namespace std;
 
@@ -28,6 +29,7 @@ vector<vector<int>> tab = readFile(fileName);
             for(int j = 0; j < tab[i].size(); j++)
                 addEdge(i, tab[i][j], randomValue());
     }
+    srand(time(NULL));
 }
 
 
@@ -53,6 +55,7 @@ vector<vector<int>> values = readFile(fileName_2);
             for(int j = 0; j < tab[i].size(); j++)
                 addEdge(i, tab[i][j], values[i][tab[i][j]]);
     }
+    srand(time(NULL));
 }
 
 
@@ -100,8 +103,7 @@ ifstream file(fileName);
 }
 
 int Graph::randomValue(){
-    srand((unsigned)time(0)); 
-    return (rand()%1000)+1; 
+    return (rand()%1000)+19;
 }
 
 void Graph::operator=(Graph x){
