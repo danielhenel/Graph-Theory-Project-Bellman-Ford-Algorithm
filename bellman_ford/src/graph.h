@@ -1,3 +1,5 @@
+#ifndef GRAPH_H
+#define GRAPH_H
 #include <iostream>
 #include <vector>
 #include <string>
@@ -5,7 +7,7 @@ using namespace std;
 
 //a class to represent the graph
 class Graph{
-
+public:
     class Node;
     class NodeListElement;
     class NodesList;
@@ -53,6 +55,9 @@ class Graph{
             bool operator==(Edge x);
             bool operator==(int x);
             void printEdge();
+            int getStartNodeIndex(){return start->getIndex();}
+            int getEndNodeIndex(){return end->getIndex();}
+            double getValue(){return value;}
     };
 
     //a struct to represent one element of list of edges
@@ -93,7 +98,8 @@ class Graph{
              */
             void deleteElement(Edge deletedEdge);
             void printEdges();
-            
+            Edge * getEdge(int u, int v);
+            Edge * getEdge(int index);
     };
 
     //a class to represent list of nodes
@@ -196,10 +202,19 @@ class Graph{
         Graph(){}
         void operator=(Graph x);
         void printEdges();
-
-
+        int getNodesCounter(){return  nodesCounter;}
+        int getEdgesCounter(){return  edgesCounter;}
+        Node * getNode(int index){return nodes.getNode(index);}
+        Edge * getEdge(int u, int v){return edges.getEdge(u,v);}
+        Edge * getEdge(int index){return edges.getEdge(index);}
+        double getEdgeValue(int index){return edges.getEdge(index)->getValue();}
+        double getEdgeValue(int u, int v){return edges.getEdge(u, v)->getValue();}
+        int getEdgeStartNodeIndex(int index){return edges.getEdge(index)->getStartNodeIndex();}
+        int getEdgeEndNodeIndex(int index){return edges.getEdge(index)->getEndNodeIndex();}
 
 
 };
 
 Graph * loadGraph();
+
+#endif

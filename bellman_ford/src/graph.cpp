@@ -239,6 +239,25 @@ void::Graph::EdgesList::printEdges(){
         temp = temp->pNext;
     }
 }
+
+Graph::Edge * Graph::EdgesList::getEdge(int u, int v){
+    EdgesListElement * temp = firstElement;
+    while(temp){
+        if(temp->element.getStartNodeIndex() == u && temp->element.getEndNodeIndex() == v) return &(temp->element);
+        temp = temp->pNext;
+    }
+    return nullptr;
+}
+
+Graph::Edge * Graph::EdgesList::getEdge(int index){
+    EdgesListElement * temp = firstElement;
+    while(temp){
+        if(temp->element == index) return &(temp->element);
+        temp = temp->pNext;
+    }
+    return nullptr;
+}
+
 //----------------Graph::NodesList----------------//
 Graph::NodesList::NodesList(){
     firstElement = nullptr;

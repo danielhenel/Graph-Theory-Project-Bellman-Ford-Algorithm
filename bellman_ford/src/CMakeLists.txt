@@ -1,4 +1,4 @@
-add_executable (bellman_ford main.cpp graph.cpp adjacency_list_1.txt)
+add_executable (bellman_ford main.cpp graph.cpp adjacency_list_1.txt bellman_ford.cpp bellman_ford.h)
 
 add_custom_target(run_bellman_ford DEPENDS bellman_ford 
     COMMAND
