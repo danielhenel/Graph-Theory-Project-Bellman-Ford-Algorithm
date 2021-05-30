@@ -139,6 +139,7 @@ void Graph::printEdges(){
 }
 
 void Graph::printIncidentMatrix(){
+    cout<<endl<<"INCIDENT MATRIX"<<endl;
     int tab[nodesCounter][edgesCounter];
     for(int i = 0; i < nodesCounter; i++)
         for(int j = 0; j < edgesCounter; j++)
@@ -169,8 +170,23 @@ void Graph::printIncidentMatrix(){
         }
         cout<<endl;
     }
+    cout<<endl;
 }
 
+
+void Graph::printAdjacencyList(){
+    cout<<endl<<"ADJACENCY LIST:"<<endl;
+    for(int i = 0 ; i < nodesCounter; i++){
+        cout.width(0);
+        cout<<i<<":\t";
+        for(int j = 0; j < nodesCounter; j++){
+            cout.width(3);
+            if(getEdge(i,j))cout<<j;
+        }
+        cout<<endl;
+    }
+    cout<<endl;
+}
 
 //----------------Graph::Node----------------//
 Graph::Node::Node(int i){
