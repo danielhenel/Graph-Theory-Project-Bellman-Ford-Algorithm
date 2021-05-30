@@ -22,6 +22,7 @@ class Paths{
 
     public:
         Paths(Graph * graph, int startNodeIndex);
+        ~Paths(){delete [] allPathNodes;}
         void printPathToNodeWithGivenIndex(int index);
 };
 
