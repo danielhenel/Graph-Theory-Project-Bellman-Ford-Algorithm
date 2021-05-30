@@ -35,7 +35,7 @@ vector<vector<int>> tab = readFile(fileName);
 
 Graph::Graph(string fileName_1, string fileName_2, bool v){
 vector<vector<int>> tab = readFile(fileName_1);
-vector<vector<int>> values = readFile(fileName_2);
+vector<vector<double>> values = readFile2(fileName_2);
     if(v){ //incident matrix
         for(int j = 0; j < tab[0].size(); j++){
             int start = -1;
@@ -59,7 +59,7 @@ vector<vector<int>> values = readFile(fileName_2);
 }
 
 
-void Graph::addEdge(int start, int end, int value){
+void Graph::addEdge(int start, int end, double value){
 
 
     if(!nodes.getNode(start)){
@@ -95,6 +95,26 @@ ifstream file(fileName);
             int number;
             while(ss >> number){
                 numbers.push_back(number);
+            }
+            tab.push_back(numbers);
+        }
+    }
+    return tab;
+}
+
+vector<vector<double>> Graph::readFile2(string fileName){
+ifstream file(fileName);
+    vector<vector<double>> tab;
+    if(file){
+        string row;
+        while(getline(file, row)){
+            stringstream ss;
+            vector<double> numbers;
+            ss << row;
+            double number;
+            while(ss >> number){
+                numbers.push_back(number);
+                cout<<number<<endl;
             }
             tab.push_back(numbers);
         }

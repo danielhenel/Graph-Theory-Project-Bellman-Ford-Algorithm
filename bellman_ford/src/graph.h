@@ -169,7 +169,7 @@ public:
          @param end ///< end node index
          @param value ///< edge value
         */
-        void addEdge(int start, int end, int value);
+        void addEdge(int start, int end, double value);
 
         /** the function adds a new node to the graph
          @param index ///< new node index
@@ -179,6 +179,7 @@ public:
         void removeEgde();
         void removeNode();
         vector<vector<int>> readFile(string fileName);
+        vector<vector<double>> readFile2(string fileName);
         int randomValue();
         
 
