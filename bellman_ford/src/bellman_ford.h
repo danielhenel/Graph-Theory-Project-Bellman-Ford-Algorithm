@@ -27,6 +27,8 @@ class Paths{
 };
 
 
+//----------------User Interface----------------//
+void userInterface(Graph * graph);
 
 
 #endif
