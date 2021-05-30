@@ -138,6 +138,40 @@ void Graph::printEdges(){
     edges.printEdges();
 }
 
+void Graph::printIncidentMatrix(){
+    int tab[nodesCounter][edgesCounter];
+    for(int i = 0; i < nodesCounter; i++)
+        for(int j = 0; j < edgesCounter; j++)
+            tab[i][j] = 0;
+
+    for(int j = 0; j < edgesCounter; j++){
+        int u = edges.getEdge(j)->getStartNodeIndex();
+        int v = edges.getEdge(j)->getEndNodeIndex();
+        tab[u][j] = 1;
+        tab[v][j] = -1;
+    }
+
+    cout<<"\t";
+    for(int j = 0; j < edgesCounter; j++)
+    {
+        cout.width(3);
+        cout<<j;
+    }
+    cout<<endl<<endl;
+        
+    for(int i = 0; i < nodesCounter; i++)
+    {
+        cout<<i<<"\t";
+        for(int j = 0; j < edgesCounter; j++)
+        {
+            cout.width(3);
+            cout<<tab[i][j];
+        }
+        cout<<endl;
+    }
+}
+
+
 //----------------Graph::Node----------------//
 Graph::Node::Node(int i){
     index = i;
@@ -354,40 +388,6 @@ Graph::Node * Graph::NodesList::getNode(int index){
     }
     return nullptr;
 }
-
-void Graph::printIncidentMatrix(){
-    int tab[nodesCounter][edgesCounter];
-    for(int i = 0; i < nodesCounter; i++)
-        for(int j = 0; j < edgesCounter; j++)
-            tab[i][j] = 0;
-
-    for(int j = 0; j < edgesCounter; j++){
-        int u = edges.getEdge(j)->getStartNodeIndex();
-        int v = edges.getEdge(j)->getEndNodeIndex();
-        tab[u][j] = 1;
-        tab[v][j] = -1;
-    }
-
-    cout<<"\t";
-    for(int j = 0; j < edgesCounter; j++)
-    {
-        cout.width(3);
-        cout<<j;
-    }
-    cout<<endl<<endl;
-        
-    for(int i = 0; i < nodesCounter; i++)
-    {
-        cout<<i<<"\t";
-        for(int j = 0; j < edgesCounter; j++)
-        {
-            cout.width(3);
-            cout<<tab[i][j];
-        }
-        cout<<endl;
-    }
-}
-
 
 //----------------Graph::IndexesList----------------//
 Graph::IndexesList::IndexesList(){
