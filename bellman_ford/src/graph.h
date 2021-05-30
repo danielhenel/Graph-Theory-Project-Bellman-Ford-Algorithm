@@ -212,6 +212,8 @@ public:
         double getEdgeValue(int u, int v){return edges.getEdge(u, v)->getValue();}
         int getEdgeStartNodeIndex(int index){return edges.getEdge(index)->getStartNodeIndex();}
         int getEdgeEndNodeIndex(int index){return edges.getEdge(index)->getEndNodeIndex();}
+        void printIncidentMatrix();
+
 
 
 };
