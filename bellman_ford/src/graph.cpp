@@ -114,7 +114,6 @@ ifstream file(fileName);
             double number;
             while(ss >> number){
                 numbers.push_back(number);
-                cout<<number<<endl;
             }
             tab.push_back(numbers);
         }
