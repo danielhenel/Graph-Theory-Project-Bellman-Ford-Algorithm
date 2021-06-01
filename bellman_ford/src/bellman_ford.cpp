@@ -105,7 +105,6 @@ void userInterface(Graph * graph){
                 while(true){
                     cout<<"Select a start node\n";
                     int startNode;
-                       cout<<nodesCounter;
                     while(cin>>startNode && ((startNode >= nodesCounter && startNode > 0)||startNode < 0))
                         {cout<<"Such node does not exist - select it once again\n";}
                     Paths * x = new Paths(graph, startNode);
