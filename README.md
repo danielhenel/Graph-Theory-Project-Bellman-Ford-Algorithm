@@ -1,6 +1,6 @@
 # TEORIA GRAFÓW: ALGORYTM BELLMANA - FORDA
 
-### Algorytm Bellmana - Forda znajduje najkrótszą ścieżkę pomiędzy danymi węzłami w grafie, który nie posiada ujemnych cylki.
+### Algorytm Bellmana - Forda znajduje najkrótszą ścieżkę pomiędzy danymi węzłami w grafie, który nie posiada ujemnych cykli.
 
 ## 1. Uruchom program
 Zainstaluj dowolny kompilator c++ oraz cmake. <br>
