@@ -506,6 +506,7 @@ Graph * loadGraph(){
             cin >> fileName;
             cout<<"GRAPH LOADING\n";
             Graph * graph = new Graph(fileName, true); //
+            graph->printEdges();
             return graph;
         }
     }
@@ -533,6 +534,7 @@ Graph * loadGraph(){
             cin >> fileName;
             cout<<"GRAPH LOADING\n";
             Graph * graph = new Graph(fileName, false);
+            graph->printEdges();
             return graph;
         }
     }
