@@ -14,7 +14,7 @@ Następnie wykonaj polecenie: make run_bellman_ford <br>
 Program umożliwia wczytanie grafu z pliku tekstowego zawierającego listę sąsiedztwa lub macierz incydencji. <br>
 Plik z grafem należy umieścić w folderze bellman_ford/src/graphs <br>
 Tam znajdziesz już przykładowe grafy. <br>
-Uwaga zawartość pliku musi mieć odpowiedni format: <br>
+Uwaga! Zawartość pliku musi mieć odpowiedni format: <br>
 ### Macierz incydencji:
 ![incident_matrix](bellman_ford/src/images/incident_matrix.png)
 ### Lista sąsiedztwa:
