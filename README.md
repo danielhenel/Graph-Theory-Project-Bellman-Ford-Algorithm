@@ -20,7 +20,7 @@ Uwaga! Zawartość pliku musi mieć odpowiedni format: <br>
 ### Lista sąsiedztwa:
 ![adjacency_list](bellman_ford/src/images/adjacency_list.png)
 ### Wagi krawędzi możesz przypisać losowo, badź też wczytać z pliku.
-### Plik powinien zawierać macierz wag, gdzie element w i-tym wierszu i j-tej kolumnie oznacza wagę krawędzi i --> j. 
+### Plik powinien zawierać macierz wag. <BR> Element w i-tym wierszu i j-tej kolumnie oznacza wagę krawędzi i --> j. 
 ### Przykładowy plik: 
 ![values](bellman_ford/src/images/values.png)
 ### Wagi mogą też zawierać część ułamkową:
