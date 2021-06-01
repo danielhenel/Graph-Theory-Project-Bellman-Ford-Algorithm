@@ -29,7 +29,7 @@ Uwaga! Zawartość pliku musi mieć odpowiedni format: <br>
 ## Najpierw zdecyduj w jaki sposób chcesz wczytać swój graf:
 ### Aby wczytać graf z listy sąsiedztwa wybierz A:
 ![select_A](bellman_ford/src/images/select_A.png)
-###Aby wczytać garf z macierzy incydencji wybierz I:
+### Aby wczytać garf z macierzy incydencji wybierz I:
 ![select_I](bellman_ford/src/images/select_I.png)
 ## Następnie wybierz opcję przypisania wag krawędziom:
 ### Aby przypisać krawędziom losowe wartości wybierz R:
