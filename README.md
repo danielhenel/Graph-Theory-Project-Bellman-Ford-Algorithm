@@ -1,6 +1,22 @@
 # TEORIA GRAFÓW: ALGORYTM BELLMANA - FORDA
 
-### Algorytm Bellmana - Forda znajduje najkrótszą ścieżkę pomiędzy danymi węzłami w grafie, który nie posiada ujemnych cykli.
+## Problemy rozwiązywane za pomocą algorytmu Bellmana – Forda:
+- wykrywanie ujemnych cykli w grafie osiągalnych ze źródła,
+- wykrywanie najkrótszych ścieżek pomiędzy węzłami (wagi w przeciwieństwie do algorytmu Dijkstry mogą być ujemne) 
+## Przykłady zastosowań:
+- wybór najkrótszej drogi między miastami,
+- wybór najtańszej drogi między miastami (gdy np. autostrady są płatne)
+- protokół routingu, decydujący o sposobie rozsyłania pakietów danych w sieci,
+- gry,
+- sztuczna inteligencja,
+- projektowanie układów elektronicznych,
+- projektowanie sieci
+## Obecnie stosuje się ulepszone wersje algorytmu Bellmana – Forda, m.in. :
+- Shortest Path Faster Algorithm (1959)
+- algorytm Yen’a (1970)
+- algorytm Bannister’a i Eppstein’a (2012)
+
+# PROGRAM
 
 ## 1. Uruchom program
 Zainstaluj dowolny kompilator c++ oraz cmake. <br>
