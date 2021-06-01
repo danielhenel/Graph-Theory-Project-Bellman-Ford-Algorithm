@@ -7,8 +7,6 @@ using namespace std;
 
 int main(){
     Graph * graph = loadGraph();
-    graph->printEdges();
-    Paths zero(graph, 0);
-    zero.printPathToNodeWithGivenIndex(5);
+    userInterface(graph);
     return 0;
 }
